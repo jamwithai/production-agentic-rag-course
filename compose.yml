@@ -51,7 +51,7 @@ services:
       - rag-network
 
   opensearch:
-    image: opensearchproject/opensearch:2.19.0
+    image: opensearchproject/opensearch:2.19.5
     container_name: rag-opensearch
     environment:
       - discovery.type=single-node
@@ -78,7 +78,7 @@ services:
       - rag-network
 
   opensearch-dashboards:
-    image: opensearchproject/opensearch-dashboards:2.19.0
+    image: opensearchproject/opensearch-dashboards:2.19.5
     container_name: rag-dashboards
     ports:
       - "5601:5601"
