@@ -6,7 +6,6 @@ python-dateutil>=2.8.0
 
 # PDF processing dependencies
 docling>=2.0.0
-opencv-python-headless>=4.8.0
 
 # Search engine dependencies
 opensearch-py>=2.4.0
