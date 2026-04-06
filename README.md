@@ -468,7 +468,7 @@ arxiv-paper-curator/
 
 | Endpoint | Method | Description | Week |
 |----------|--------|-------------|------|
-| `/health` | GET | Service health check | Week 1 |
+| `/api/v1/health` | GET | Service health check | Week 1 |
 | `/api/v1/papers` | GET | List stored papers | Week 2 |
 | `/api/v1/papers/{id}` | GET | Get specific paper | Week 2 |
 | `/api/v1/search` | POST | BM25 keyword search | Week 3 |
