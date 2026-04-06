@@ -36,7 +36,12 @@ RUN pip install --no-cache-dir \
 
 # Copy requirements and install project dependencies
 COPY requirements-airflow.txt /tmp/requirements-airflow.txt
-RUN pip install --no-cache-dir -r /tmp/requirements-airflow.txt
+RUN pip install --no-cache-dir -r /tmp/requirements-airflow.txt && \
+    # rapidocr (pulled by docling) installs opencv-python (full version) which requires \
+    # libGL.so.1 — a GUI library not available in headless containers. \
+    # Force-replace with opencv-python-headless which has no libGL dependency. \
+    pip uninstall -y opencv-python opencv-python-headless && \
+    pip install --no-cache-dir opencv-python-headless
 
 # Copy and set up entrypoint script
 COPY entrypoint.sh /entrypoint.sh
