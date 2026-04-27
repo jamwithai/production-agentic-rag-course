@@ -25,7 +25,7 @@ services:
       - OPENSEARCH_HOST=http://opensearch:9200
       - OPENSEARCH__HOST=http://opensearch:9200
       - OLLAMA_HOST=http://ollama:11434
-      - POSTGRES_DATABASE_URL=postgresql+psycopg2://rag_user:rag_password@postgres:5432/rag_db
+      - POSTGRES_DATABASE_URL=postgresql://postgres:Saha%4006122004@postgres:5432/rag_db
       - LANGFUSE_HOST=http://langfuse-web:3000 
       - LANGFUSE_DEBUG=true
       - REDIS__HOST=redis
@@ -112,11 +112,12 @@ services:
       - AIRFLOW_HOME=/opt/airflow
       - PYTHONPATH=/opt/airflow/src
       # Container hostnames for Airflow
-      - POSTGRES_DATABASE_URL=postgresql+psycopg2://rag_user:rag_password@postgres:5432/rag_db
+      - POSTGRES_DATABASE_URL=postgresql://postgres:Saha%4006122004@postgres:5432/rag_db
       - OPENSEARCH_HOST=http://opensearch:9200
       - OPENSEARCH__HOST=http://opensearch:9200
       - OLLAMA_HOST=http://ollama:11434
       - REDIS__HOST=redis
+      - AIRFLOW__DATABASE__SQL_ALCHEMY_CONN=postgresql://postgres:Saha%4006122004@postgres:5432/rag_db
     volumes:
       - ./airflow/dags:/opt/airflow/dags
       - airflow_logs:/opt/airflow/logs
@@ -155,14 +156,15 @@ services:
     container_name: rag-postgres
     environment:
       - POSTGRES_DB=rag_db
-      - POSTGRES_USER=rag_user
-      - POSTGRES_PASSWORD=rag_password
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=Saha@06122004
       - POSTGRES_HOST_AUTH_METHOD=password
       - PGDATA=/var/lib/postgresql/data/pgdata
     ports:
       - "5432:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
+      - ./airflow/init-db.sql:/docker-entrypoint-initdb.d/init-db.sql
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U rag_user -d rag_db"]
       interval: 5s
